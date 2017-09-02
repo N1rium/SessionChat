@@ -113,10 +113,6 @@ angular.module("SocketChat", []).controller("ChatController",
         }
     });
 
-    socket.on("cacheduser", function(data) {
-        addUser(data);
-    });
-
     socket.on("rename", function(data) {
         for(let i = 0; i < $scope.chatData.messages.length; i++) {
             let obj = $scope.chatData.messages[i];

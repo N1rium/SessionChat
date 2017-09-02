@@ -51,8 +51,6 @@ io.on("connection", function(socket) {
         });
     }
 
-    console.log("a user connected");
-
     // socket.use(function(packet, next) {
     //     return next();
     // });
@@ -94,7 +92,7 @@ io.on("connection", function(socket) {
             if(obj.id == id) {
                 obj.user.id = socket.id;
                 users[socket.id] = obj.user;
-                //io.to(socket.id).emit("cacheduser", users[id]);
+                newUser(obj.user.username);
                 welcome(socket);
             }
         });
