@@ -130,7 +130,11 @@ function handleCommands(msg) {
 /* Joins default room and welcomes newly connected users */
 function welcome(socket) {
     joinRoom(DEFAULT_ROOM);
-    io.to(socket.id).emit("welcome", users, socket.id);
+    var obj = {
+        "users" : users,
+        "self" : users[socket.id],
+    };
+    io.to(socket.id).emit("welcome", obj, socket.id);
 }
 
 /* Basically creates and adds a new user object */

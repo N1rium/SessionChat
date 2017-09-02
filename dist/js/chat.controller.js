@@ -60,22 +60,20 @@ angular.module("SocketChat", []).controller("ChatController",
 
     socket.on("welcome", function(data, id) {
         $scope.$apply(function() {
-            for (var key in data) {
-                addUser(data[key]);
+            for (var key in data.users) {
+                addUser(data.users[key]);
             }
         });
 
         try {
             localStorage.setItem("socketcache", id);
-            console.log(localStorage);
         } catch(e) {
 
         }
 
         $scope.$apply(function() {
             $scope.isLogin = true;
-            $scope.chatData.self = self;
-            console.log(self);
+            $scope.chatData.self = data.self;
         });
     });
 
