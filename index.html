@@ -43,7 +43,7 @@
             <hr>
             <section>
                 Users
-                <div ng-repeat="user in chatData.users track by $index">
+                <div class="user" ng-repeat="user in chatData.users track by $index" ng-class="{'self' : user.id == chatData.self.id}">
                     <span class="font-green">* </span>
                     {{user.username}}
                 </div>

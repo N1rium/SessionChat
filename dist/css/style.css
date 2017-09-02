@@ -105,6 +105,10 @@ hr {
   margin: 5px 10px;
   cursor: pointer; }
 
+#room-window section .user.self {
+  color: #61afef;
+  cursor: default; }
+
 #room-window section > div:hover {
   color: #d19a66; }
 

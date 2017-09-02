@@ -143,6 +143,11 @@ hr {
     cursor: pointer;
 }
 
+#room-window section .user.self {
+    color: $color-blue;
+    cursor: default;
+}
+
 #room-window section > div:hover {
     color: $color-orange;
 }
