@@ -92,9 +92,8 @@ io.on("connection", function(socket) {
     socket.on("getcacheduser", function(id) {
         userCache.forEach(function(obj) {
             if(obj.id == id) {
-                console.log("We have a cached user here!");
-                obj.id = socket.id;
-                users[id] = obj.user;
+                obj.user.id = socket.id;
+                users[socket.id] = obj.user;
                 //io.to(socket.id).emit("cacheduser", users[id]);
                 welcome(socket);
             }
