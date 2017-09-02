@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>SocketChat</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollable.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/chat.controller.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body ng-app="SocketChat" ng-controller="ChatController">
+    <div id="login-window" ng-hide="isLogin">
+        <header><span class="font-orange">Session</span>Chat</header>
+        <form ng-submit="register()">
+            <input type="text" placeholder="Username..." ng-model="username"/>
+            <div class="button-area">
+                <button>Go</button>
+            </div>
+        </form>
+    </div>
+
+    <main ng-show="isLogin">
+        <div id="room-window">
+            <header>
+                <div><span class="font-orange">Session</span>Chat</div>
+                <div class="font-blue">BlommaN</div>
+            </header>
+            <hr>
+            <section>
+                Rooms
+                <div ng-repeat="room in chatData.rooms track by $index">
+                    <span class="font-purple"># </span>
+                    {{room}}
+                </div>
+            </section>
+            <hr>
+            <section>
+                Users
+                <div ng-repeat="user in chatData.users track by $index">
+                    <span class="font-green">* </span>
+                    {{user.username}}
+                </div>
+            </section>
+        </div>
+        <div id="chat-window">
+            <div id="chatscroll" class="area message-area">
+                <div class="chat-msg-outer">
+                    <div class="chat-msg" ng-repeat="obj in chatData.messages track by $index">
+                        <aside>
+                            <img src="images/profile.jpg"/>
+                        </aside>
+                        <div>
+                            <div class="author">
+                                <span class="font-blue">{{obj.user.username}}</span>
+                                <span class="font-green">{{obj.date | date:'HH:mm'}}</span>
+                            </div>
+                            <div class="body font-orange">
+                                {{obj.message}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="area input-area">
+                <form ng-submit="send()">
+                    <input type="text" ng-change="inputChange()" ng-model="chatmsg"
+                        placeholder="Send message..."/>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

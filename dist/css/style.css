@@ -1,0 +1,177 @@
+@font-face {
+  font-family: 'Stratum';
+  src: url("/fonts/stratum.woff") format("woff"); }
+* {
+  box-sizing: border-box; }
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #21252b;
+  color: #d7dae0;
+  font-family: Stratum;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+main {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: space-around; }
+
+input {
+  background: #1b1d23;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  color: #d19a66;
+  padding: 10px;
+  font-size: 1em;
+  font-family: Stratum;
+  width: 100%; }
+
+button {
+  outline: none;
+  background: #d7dae0;
+  border: 1px solid rgba(0, 0, 0, 0.33);
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 2px;
+  color: #000;
+  min-width: 90px;
+  cursor: pointer; }
+
+button:hover {
+  background: #d19a66; }
+
+hr {
+  margin: 20px 0px; }
+
+.font-blue {
+  color: #61afef; }
+
+.font-green {
+  color: #64a06b; }
+
+.font-orange {
+  color: #d19a66; }
+
+.font-purple {
+  color: #c078dd; }
+
+.divider {
+  margin: 20px 0px; }
+
+#login-window {
+  margin: 0 auto;
+  max-width: 480px;
+  top: 50%;
+  transform: translateY(50%);
+  -webkit-transform: translateY(50%);
+  position: relative;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.33); }
+
+#login-window .button-area {
+  text-align: center;
+  margin: 20px 0px; }
+
+#login-window header {
+  font-size: 2em;
+  margin: 20px 0px; }
+
+#room-window {
+  flex: 0.25;
+  max-width: 200px;
+  min-width: 140px;
+  padding: 10px;
+  position: relative; }
+
+#room-window header {
+  font-size: 1.4em; }
+
+#room-window header > div:last-child {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 0.75em; }
+
+#room-window section {
+  font-size: 1.25em; }
+
+#room-window section > div {
+  font-size: 0.8em;
+  margin: 5px 10px;
+  cursor: pointer; }
+
+#room-window section > div:hover {
+  color: #d19a66; }
+
+#room-window section > div:first-child {
+  margin-top: 10px; }
+
+#chat-window {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  background: #282c34;
+  border: 1px solid rgba(0, 0, 0, 0.33);
+  padding: 10px;
+  display: flex;
+  flex-direction: column; }
+
+#chat-window > .area {
+  flex: 1;
+  position: relative; }
+
+#chat-window .message-area {
+  display: flex;
+  overflow: auto; }
+
+#chat-window .input-area {
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+  text-align: center;
+  max-height: 64px; }
+
+/* Used to hide button but allow ENTER on forms input */
+#chat-window .input-area button {
+  visibility: hidden;
+  position: absolute;
+  top: 1000%;
+  left: 1000%; }
+
+.chat-msg-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  min-height: min-content;
+  -moz-min-height: min-content;
+  -o-min-height: min-content;
+  -webkit-min-height: min-content; }
+
+.chat-msg {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px; }
+
+.chat-msg > * {
+  flex: 1 auto;
+  word-break: break-word; }
+
+.chat-msg aside {
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  margin-right: 10px; }
+
+.chat-msg aside > img {
+  width: 48px; }
+
+/*# sourceMappingURL=style.css.map */
