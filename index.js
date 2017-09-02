@@ -160,7 +160,7 @@ function renameUser(name) {
 /* Joins room and emits event */
 function joinRoom(room) {
     _socket.join(room);
-    io.to(room).emit("joinedroom", room);
+    io.to(_socket.id).emit("joinedroom", room);
 }
 
 /* Checks user cache for passed TTLs and clears accordingly */
