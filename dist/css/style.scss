@@ -8,6 +8,7 @@ $color-white: #d7dae0;
 $border-radius: 2px;
 $padding-size: 10px;
 $border-discrete: 1px solid rgba(0,0,0,0.33);
+$primary-font: Stratum, 'Droid Sans', sans-serif;
 
 @mixin text-ellipsis() {
     text-overflow: ellipsis;
@@ -28,7 +29,7 @@ body, html {
     padding: 0;
     background-color: $color-bg-dark;
     color: $color-white;
-    font-family: Stratum;
+    font-family: $primary-font;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -49,7 +50,7 @@ input {
     color: $color-orange;
     padding: $padding-size;
     font-size: 1em;
-    font-family: Stratum;
+    font-family: $primary-font;
     width: 100%;
 }
 
