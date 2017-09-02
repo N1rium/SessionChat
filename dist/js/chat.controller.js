@@ -8,8 +8,7 @@ angular.module("SocketChat", []).controller("ChatController",
         "UserRename"    : "renameuser",
     };
 
-    var previousMessages = [];
-
+    var sentMessages = [];
     let socket;
 
     function connectIO() {
@@ -67,7 +66,7 @@ angular.module("SocketChat", []).controller("ChatController",
         });
 
         try {
-            localStorage.setItem("socketCache", id);
+            localStorage.setItem("socketcache", id);
             console.log(localStorage);
         } catch(e) {
 
@@ -151,7 +150,7 @@ angular.module("SocketChat", []).controller("ChatController",
 
     $scope.send = function() {
         socket.emit(SOCKET_KEYS["ChatMessage"], $scope.chatmsg);
-        previousMessages.push($scope.chatmsg);
+        sentMessages.push($scope.chatmsg);
         $scope.chatmsg = "";
     }
 
@@ -165,7 +164,7 @@ angular.module("SocketChat", []).controller("ChatController",
     });
 
     try {
-        var sc = localStorage.getItem("socketCache");
+        var sc = localStorage.getItem("socketcache");
         console.log("SC: ", sc);
         if(sc)
             socket.emit("getcacheduser", sc);
