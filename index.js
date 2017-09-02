@@ -17,7 +17,7 @@ const CMDS = [
 const CLEAR_USER_CACHE_INTERVAL = 1000 * 60 * 5;
 
 /* TTL for how long users can be disconnected until released */
-const USER_CACHE_TTL = 1000 * 60;
+const USER_CACHE_TTL = 1000 * 60 * 5;
 
 /* The main users object */
 let users = {};
