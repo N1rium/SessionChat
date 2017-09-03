@@ -194,6 +194,8 @@ angular.module("SocketChat", []).controller("ChatController",
     $scope.uploadImage = function(event) {
         var file = event.target.files[0];
         var filesize = Math.round(file.size / 1024);
+
+        /* Client side size validation */
         if(filesize > MAX_FILE_SIZE) {
             err("File is too big, was: ~"
             + filesize
