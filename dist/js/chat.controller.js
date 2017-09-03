@@ -34,16 +34,24 @@ angular.module("SocketChat", []).controller("ChatController",
 
     $scope.chatData = {
         "self" : {},
-        "messages" : [], /* List of messages */
-        "rooms" : [], /* List of rooms */
         "users" : [], /* List of users */
         "typing" : [], /* List of people that are currently typing */
     };
 
+    $scope.rooms = [];
     $scope.room = null;
 
     $scope.setRoom = function(room) {
         $scope.room = room;
+    }
+
+    $scope.getRoom = function(name) {
+        for(let i = 0; i < $scope.rooms.length; i++) {
+            var room = $scope.rooms[i];
+            if(room.name == name)
+                return room;
+        }
+        return null;
     }
 
     $scope.createRoom = function(room, isPublic = true) {
