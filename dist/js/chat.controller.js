@@ -70,18 +70,19 @@ angular.module("SocketChat", []).controller("ChatController",
         $scope.chatData.users.push(user);
     }
 
-    $scope.addRoom = function(room) {
-        for(let i = 0; i < $scope.chatData.rooms.length; i++) {
-            let r = $scope.chatData.rooms[i];
-            if(r == room)
+    $scope.addRoom = function(name) {
+        for(let i = 0; i < $scope.rooms.length; i++) {
+            let r = $scope.rooms[i];
+            if(r.name == name)
                 return;
         }
-        $scope.chatData.rooms.push(room);
+        $scope.rooms.push(new Room(name));
     }
 
     socket.on("chatmsg", function(data) {
         $scope.$apply(function() {
-            $scope.chatData.messages.push(data);
+            console.log("Data", data);
+            $scope.getRoom(data.room).messages.push(data);
             $timeout(function() {
                 $scope.chatScrollBottom();
             }, 10);
@@ -188,13 +189,12 @@ angular.module("SocketChat", []).controller("ChatController",
     }
 
     $scope.send = function() {
-        socket.emit(SOCKET_KEYS["ChatMessage"], $scope.chatmsg);
-        sentMessages.push($scope.chatmsg);
+        socket.emit(SOCKET_KEYS["ChatMessage"], $scope.chatmsg, $scope.room.name);
         $scope.chatmsg = "";
     }
 
     $scope.inputChange = function(value) {
-        //socket.emit(SOCKET_KEYS["InputChanged"], value);
+        socket.emit(SOCKET_KEYS["InputChanged"], value);
     }
 
     /* Destruction! */
