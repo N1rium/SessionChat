@@ -163,6 +163,11 @@ function joinRoom(room) {
     io.to(_socket.id).emit("joinedroom", room);
 }
 
+/* Error reporting to client */
+function err(reason) {
+    io.to(_socket.id).emit("error", reason);
+}
+
 /* Checks user cache for passed TTLs and clears accordingly */
 function sweepUserCache() {
     let start = Date.now();
