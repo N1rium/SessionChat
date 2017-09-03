@@ -214,9 +214,9 @@ angular.module("SocketChat", []).controller("ChatController",
         }
 
         var reader = new FileReader();
-        console.log("start");
+        //TODO - start loader for upload
         reader.onload = function(event) {
-            console.log("Result: ", event.target.result);
+            //TODO - stop loader for upload
             $scope.$apply(function() {
                 $scope.previewImage = event.target.result;
             });
