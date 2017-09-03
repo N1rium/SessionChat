@@ -79,14 +79,26 @@ io.on("connection", function(socket) {
     });
 
     socket.on("getcacheduser", function(id) {
-        userCache.forEach(function(obj) {
+        for(let i = 0; i < userCache.length; i++) {
+            let obj = userCache[i];
             if(obj.id == id) {
                 obj.user.id = socket.id;
                 users[socket.id] = obj.user;
                 newUser(obj.user.username);
-                welcome(socket);
+                welcome();
+                userCache.splice(i,1);
+                i--;
             }
-        });
+        }
+    });
+
+    socket.on("createroom", function(room) {
+        if(room["public"]) {
+            io.emit("roomcreated", room["name"]);
+        } else {
+            io.to(socket.id).emit("roomcreated", room["name"]);
+        }
+        joinRoom(room["name"]);
     });
 
     socket.on("renameuser", function(name) {
