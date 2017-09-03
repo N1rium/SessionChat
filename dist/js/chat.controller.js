@@ -139,18 +139,6 @@ angular.module("SocketChat", []).controller("ChatController",
         });
     });
 
-    socket.on("leftroom", function(data) {
-        for(var i = 0; i < $scope.chatData.rooms.length; i++) {
-            var r = $scope.chatData.rooms[i];
-            if(r == data) {
-                $scope.$apply(function() {
-                    $scope.chatData.rooms.splice(i,1);
-                });
-                break;
-            }
-        }
-    });
-
     socket.on("rename", function(data) {
         for(let i = 0; i < $scope.chatData.messages.length; i++) {
             let obj = $scope.chatData.messages[i];
