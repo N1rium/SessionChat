@@ -135,7 +135,7 @@ angular.module("SocketChat", []).controller("ChatController",
     socket.on("joinedroom", function(data) {
         $scope.$apply(function() {
             $scope.addRoom(data);
-            $scope.setRoom($scope.room || data);
+            $scope.setRoom($scope.room || $scope.rooms[0]);
         });
     });
 
