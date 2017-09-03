@@ -86,7 +86,7 @@ io.on("connection", function(socket) {
 
     socket.on("register", function(name) {
         newUser(name);
-        welcome(socket);
+        welcome();
     });
 
     socket.on("getcacheduser", function(id) {
@@ -128,13 +128,13 @@ function handleCommands(msg) {
 }
 
 /* Joins default room and welcomes newly connected users */
-function welcome(socket) {
+function welcome() {
     joinRoom(DEFAULT_ROOM);
     var obj = {
         "users" : users,
-        "self" : users[socket.id],
+        "self" : users[_socket.id],
     };
-    io.to(socket.id).emit("welcome", obj, socket.id);
+    io.to(_socket.id).emit("welcome", obj, _socket.id);
 }
 
 /* Basically creates and adds a new user object */
