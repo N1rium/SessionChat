@@ -39,21 +39,10 @@ app.get("/", function(req, res) {
 io.on("connection", function(socket) {
     _socket = socket;
 
-    /*  Emits to all rooms on client */
-    function emitClient(client, event, data) {
-        client.rooms.forEach(function(room) {
-            io.to(room).emit(event, data);
-        });
-    }
-
-    /* Broadcasts to all rooms on client */
-    function broadcastClient(client, event, data) {
-        client.rooms.forEach(function(room) {
-            io.to(room).broadcast(event, data);
-        });
-    }
-
+    /* TODO - Think about a dynamic system to handle incoming calls */
     // socket.use(function(packet, next) {
+    //     console.log("Packet:", packet);
+    //     socketMap[packet[0]](packet[1]);
     //     return next();
     // });
 
