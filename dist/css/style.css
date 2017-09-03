@@ -105,6 +105,9 @@ form input {
   padding: 10px;
   position: relative; }
 
+#room-window .room.selected {
+  color: #64a06b; }
+
 #room-window header {
   font-size: 1.4em; }
 

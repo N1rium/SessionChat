@@ -147,6 +147,10 @@ form input {
     position: relative;
 }
 
+#room-window .room.selected {
+    color: $color-green;
+}
+
 #room-window header {
     font-size: 1.4em;
 }
