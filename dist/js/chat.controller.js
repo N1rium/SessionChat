@@ -140,12 +140,14 @@ angular.module("SocketChat", []).controller("ChatController",
     });
 
     socket.on("rename", function(data) {
-        for(let i = 0; i < $scope.chatData.messages.length; i++) {
-            let obj = $scope.chatData.messages[i];
-            if(obj["user"].id == data["user"].id) {
-                $scope.$apply(function() {
-                    obj["user"]["username"] = data["name"];
-                });
+        for(let i = 0; i < $scope.rooms.length; i++) {
+            for(let j = 0; j < $scope.room.messages.length; j++) {
+                let obj = $scope.rooms[i].messages[j];
+                if(obj["user"].id == data["user"].id) {
+                    $scope.$apply(function() {
+                        obj["user"]["username"] = data["name"];
+                    });
+                }
             }
         }
 
