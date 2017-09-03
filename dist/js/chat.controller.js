@@ -4,7 +4,7 @@ angular.module("SocketChat", []).controller("ChatController",
     /* Map to hold keys used to communicate with SocketIO */
     const SOCKET_KEYS = {
         "ChatMessage"   : "chatmsg",
-        "InputChanged"  : "inputchanged",
+        "InputChanged"  : "istyping",
         "UserRename"    : "renameuser",
     };
 
