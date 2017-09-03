@@ -170,6 +170,10 @@ angular.module("SocketChat", []).controller("ChatController",
     });
 
     $scope.register = function() {
+        if(!$scope.username || !$scope.username.length) {
+            err("Insufficient username!");
+            return;
+        }
         socket.emit("register", $scope.username);
     }
 
