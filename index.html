@@ -18,8 +18,12 @@
 <body ng-app="SocketChat" ng-controller="ChatController">
     <div id="login-window" ng-hide="isLogin">
         <header><span class="font-orange">Session</span>Chat</header>
+        <img ng-if="previewImage" ng-src="{{previewImage}}"/>
         <form ng-submit="register()">
             <input type="text" placeholder="Username..." ng-model="username"/>
+
+            <!-- "Hack" to directly bind onchange to an Angular function -->
+            <input type="file" accept="image/*" onchange="angular.element(this).scope().uploadImage(event)" />
             <div class="button-area">
                 <button>Go</button>
             </div>

@@ -8,6 +8,8 @@ angular.module("SocketChat", []).controller("ChatController",
         "UserRename"    : "renameuser",
     };
 
+    const MAX_FILE_SIZE = 20; //Maximum file size for image upload
+
     var sentMessages = [];
     let socket;
 
@@ -176,6 +178,30 @@ angular.module("SocketChat", []).controller("ChatController",
     $scope.$on("destroy", function() {
 
     });
+
+    /* Preview image on login screen */
+    $scope.previewImage = null;
+
+    /* Tied to input[type="file"] onchange handler */
+    $scope.uploadImage = function(event) {
+        var file = event.target.files[0];
+        var filesize = Math.round(file.size / 1024);
+        if(filesize > MAX_FILE_SIZE) {
+            err("File is too big, was: ~"
+            + filesize
+            + "kb. Maximum size allowed is: "
+            + MAX_FILE_SIZE + "kb.");
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            console.log("Result: ", event.target.result);
+            $scope.$apply(function() {
+                $scope.previewImage = event.target.result;
+            });
+         };
+    }
 
     try {
         var sc = localStorage.getItem("socketcache");
