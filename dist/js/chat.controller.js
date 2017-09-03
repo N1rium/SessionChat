@@ -31,6 +31,19 @@ angular.module("SocketChat", []).controller("ChatController",
         "typing" : [], /* List of people that are currently typing */
     };
 
+    $scope.room = null;
+
+    $scope.setRoom = function(room) {
+        $scope.room = room;
+    }
+
+    $scope.createRoom = function(room, isPublic = true) {
+        socket.emit("createroom", {
+            "name" : room,
+            "public" : isPublic,
+        });
+    }
+
     function addUser(user) {
         for(let i = 0; i < $scope.chatData.users.length; i++) {
             let u = $scope.chatData.users[i];
@@ -95,9 +108,16 @@ angular.module("SocketChat", []).controller("ChatController",
         }
     });
 
+    socket.on("roomcreated", function(room) {
+        $scope.$apply(function() {
+            $scope.addRoom(room);
+        });
+    });
+
     socket.on("joinedroom", function(data) {
         $scope.$apply(function() {
             $scope.addRoom(data);
+            $scope.setRoom($scope.room || data);
         });
     });
 
