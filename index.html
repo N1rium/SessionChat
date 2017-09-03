@@ -41,9 +41,9 @@
             <hr>
             <section>
                 Rooms
-                <div ng-repeat="room in chatData.rooms track by $index">
-                    <span class="font-purple"># </span>
-                    {{room}}
+                <div class="room" ng-repeat="r in rooms track by $index" ng-class="{'selected' : r == room}" ng-click="setRoom(r)">
+                    <span class="font-purple" ng-click="createRoom('Snusk')"># </span>
+                    {{r.name}}
                 </div>
             </section>
             <hr>
