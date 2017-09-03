@@ -205,12 +205,15 @@ angular.module("SocketChat", []).controller("ChatController",
         }
 
         var reader = new FileReader();
+        console.log("start");
         reader.onload = function(event) {
             console.log("Result: ", event.target.result);
             $scope.$apply(function() {
                 $scope.previewImage = event.target.result;
             });
          };
+
+         reader.readAsDataURL(file);
     }
 
     try {
