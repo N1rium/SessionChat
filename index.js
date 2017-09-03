@@ -69,8 +69,8 @@ io.on("connection", function(socket) {
         }
     });
 
-    socket.on("istyping", function() {
-        io.broadcast.emit("istyping", users[socket.id].username);
+    socket.on("istyping", function(room = DEFAULT_ROOM) {
+        io.to(room).emit("istyping", users[_socket.id].username);
     });
 
     socket.on("register", function(name) {
