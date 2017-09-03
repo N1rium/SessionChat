@@ -155,6 +155,14 @@ angular.module("SocketChat", []).controller("ChatController",
         }
     });
 
+    function err(reason) {
+        console.warn(reason);
+    }
+
+    socket.on("error", function(reason) {
+        err(reason);
+    });
+
     $scope.register = function() {
         socket.emit("register", $scope.username);
     }
