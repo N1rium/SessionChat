@@ -15,6 +15,12 @@ $primary-font: Stratum, 'Droid Sans', sans-serif;
     overflow: hidden;
 }
 
+@mixin avatar() {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
 @font-face {
   font-family: 'Stratum';
   src: url("/fonts/stratum.woff") format("woff");
@@ -74,6 +80,14 @@ hr {
     margin: 20px 0px;
 }
 
+img.avatar {
+    @include avatar();
+}
+
+form input {
+    margin: 10px 0px;
+}
+
 .font-blue {
     color: $color-blue;
 }
@@ -95,15 +109,24 @@ hr {
 }
 
 #login-window {
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#login-window > div {
     max-width: 480px;
-    top: 50%;
-    transform: translateY(50%);
-    -webkit-transform: translateY(50%);
+    max-height: 640px;
     position: relative;
     text-align: center;
     padding: $padding-size;
     border: $border-discrete;
+    margin: auto;
+    position: relative !important;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    white-space: normal;
 }
 
 #login-window .button-area {

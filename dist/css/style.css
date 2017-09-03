@@ -48,6 +48,14 @@ button:hover {
 hr {
   margin: 20px 0px; }
 
+img.avatar {
+  width: 64px;
+  height: 64px;
+  object-fit: contain; }
+
+form input {
+  margin: 10px 0px; }
+
 .font-blue {
   color: #61afef; }
 
@@ -64,15 +72,23 @@ hr {
   margin: 20px 0px; }
 
 #login-window {
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: relative; }
+
+#login-window > div {
   max-width: 480px;
-  top: 50%;
-  transform: translateY(50%);
-  -webkit-transform: translateY(50%);
+  max-height: 640px;
   position: relative;
   text-align: center;
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.33); }
+  border: 1px solid rgba(0, 0, 0, 0.33);
+  margin: auto;
+  position: relative !important;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  white-space: normal; }
 
 #login-window .button-area {
   text-align: center;
