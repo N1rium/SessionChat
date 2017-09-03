@@ -10,7 +10,14 @@ angular.module("SocketChat", []).controller("ChatController",
 
     const MAX_FILE_SIZE = 20; //Maximum file size for image upload
 
-    var sentMessages = [];
+    /* Class to represent a room */
+    class Room {
+        constructor(name) {
+            this.name = name;
+            this.messages = [];
+        }
+    }
+
     let socket;
 
     function connectIO() {
