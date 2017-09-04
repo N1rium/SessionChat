@@ -62,6 +62,7 @@ io.on("connection", function(socket) {
     socket.on("chatmsg", function(msg, room = DEFAULT_ROOM) {
         if(!handleCommands(msg)) {
             io.to(room).emit("chatmsg", {
+                "room" : room,
                 "message" : msg,
                 "user" : users[socket.id],
                 "date" : new Date(),
