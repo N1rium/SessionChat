@@ -25,9 +25,6 @@ let users = {};
 /* List of ids cached to remember disconnected users */
 let userCache = [];
 
-/* Internal reference to socket for convenience */
-let _socket;
-
 /* Setup static files catalogue  */
 app.use(require("express").static(__dirname + "/dist"));
 
@@ -37,7 +34,6 @@ app.get("/", function(req, res) {
 
 /* The main connection stream */
 io.on("connection", function(socket) {
-    _socket = socket;
 
     /* TODO - Think about a dynamic system to handle incoming calls */
     // socket.use(function(packet, next) {
@@ -60,7 +56,7 @@ io.on("connection", function(socket) {
     });
 
     socket.on("chatmsg", function(msg, room = DEFAULT_ROOM) {
-        if(!handleCommands(msg)) {
+        if(!handleCommands(msg, socket)) {
             io.to(room).emit("chatmsg", {
                 "room" : room,
                 "message" : msg,
@@ -71,12 +67,12 @@ io.on("connection", function(socket) {
     });
 
     socket.on("istyping", function(room = DEFAULT_ROOM) {
-        io.to(room).emit("istyping", users[_socket.id].username);
+        //io.to(room).emit("istyping", users[_socket.id].username);
     });
 
     socket.on("register", function(name) {
-        newUser(name);
-        welcome();
+        newUser(name, socket);
+        welcome(socket);
     });
 
     socket.on("getcacheduser", function(id) {
@@ -85,8 +81,8 @@ io.on("connection", function(socket) {
             if(obj.id == id) {
                 obj.user.id = socket.id;
                 users[socket.id] = obj.user;
-                newUser(obj.user.username);
-                welcome();
+                newUser(obj.user.username, socket);
+                welcome(socket);
                 userCache.splice(i,1);
                 i--;
             }
@@ -99,17 +95,17 @@ io.on("connection", function(socket) {
         } else {
             io.to(socket.id).emit("roomcreated", room["name"]);
         }
-        joinRoom(room["name"]);
+        joinRoom(room["name"], socket);
     });
 
     socket.on("renameuser", function(name) {
-        renameUser(name);
+        renameUser(name, socket);
     });
 });
 
 /* Checks msg param for command prefix and handles it accordingly */
-function handleCommands(msg) {
-    let id = _socket.id;
+function handleCommands(msg, socket) {
+    let id = socket.id;
     if(msg.indexOf(CMD_PREFIX) != 0)
         return false;
 
@@ -130,26 +126,26 @@ function handleCommands(msg) {
 }
 
 /* Joins default room and welcomes newly connected users */
-function welcome() {
-    joinRoom(DEFAULT_ROOM);
+function welcome(socket) {
+    joinRoom(DEFAULT_ROOM, socket);
     var obj = {
         "users" : users,
-        "self" : users[_socket.id],
+        "self" : users[socket.id],
     };
-    io.to(_socket.id).emit("welcome", obj, _socket.id);
+    io.to(socket.id).emit("welcome", obj, socket.id);
 }
 
 /* Basically creates and adds a new user object */
-function newUser(name) {
-    let id = _socket.id;
+function newUser(name, socket) {
+    let id = socket.id;
     console.log("Creating new user with username: ", name);
     users[id] = {"id" : id, "username" : name };
     io.emit("newuser", users[id]);
 }
 
 /* Renames a user */
-function renameUser(name) {
-    let id = _socket.id;
+function renameUser(name, socket) {
+    let id = socket.id;
     let u = users[id];
     console.log("Renaming user: " + u.username + " with new username: ", name);
     io.emit("rename", {
@@ -160,14 +156,14 @@ function renameUser(name) {
 }
 
 /* Joins room and emits event */
-function joinRoom(room) {
-    _socket.join(room);
-    io.to(_socket.id).emit("joinedroom", room);
+function joinRoom(room, socket) {
+    socket.join(room);
+    io.to(socket.id).emit("joinedroom", room);
 }
 
 /* Error reporting to client */
-function err(reason) {
-    io.to(_socket.id).emit("error", reason);
+function err(reason, socket) {
+    io.to(socket.id).emit("error", reason);
 }
 
 /* Checks user cache for passed TTLs and clears accordingly */
